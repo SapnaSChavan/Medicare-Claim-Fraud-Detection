@@ -1,0 +1,65 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Healthcare Provider Fraud Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Healthcare Provider Fraud Detection</h2>
+        <form action="/predict" method="post">
+            <label for="Total_Claims_Per_Bene">Total Claims Per Beneficiary:</label>
+            <input type="number" step="0.01" name="Total_Claims_Per_Bene" id="Total_Claims_Per_Bene" placeholder="Enter Total Claims Per Beneficiary" required>
+
+            <label for="TimeInHptal">Time in Hospital (Days):</label>
+            <input type="number" step="0.01" name="TimeInHptal" id="TimeInHptal" placeholder="Enter Time in Hospital" required>
+
+            <label for="Provider_Claim_Frequency">Provider Claim Frequency:</label>
+            <input type="number" step="0.01" name="Provider_Claim_Frequency" id="Provider_Claim_Frequency" placeholder="Enter Provider Claim Frequency" required>
+
+            <label for="ChronicCond_stroke_Yes">Chronic Condition Stroke:</label>
+            <select name="ChronicCond_stroke_Yes" id="ChronicCond_stroke_Yes" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select><br>
+
+            <label for="DeductibleAmtPaid">Deductible Amount Paid:</label>
+            <input type="number" step="0.01" name="DeductibleAmtPaid" id="DeductibleAmtPaid" placeholder="Enter Deductible Amount Paid" required>
+
+            <label for="NoOfMonths_PartBCov">Number of Months Part B Coverage:</label>
+            <input type="number" step="0.01" name="NoOfMonths_PartBCov" id="NoOfMonths_PartBCov" placeholder="Enter Number of Months Part B Coverage" required>
+
+            <label for="NoOfMonths_PartACov">Number of Months Part A Coverage:</label>
+            <input type="number" step="0.01" name="NoOfMonths_PartACov" id="NoOfMonths_PartACov" placeholder="Enter Number of Months Part A Coverage" required>
+
+            <label for="OPD_Flag_Yes">OPD Flag:</label>
+            <select name="OPD_Flag_Yes" id="OPD_Flag_Yes" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select><br>
+
+            <label for="Diagnosis Count">Diagnosis Count:</label>
+            <input type="number" step="0.01" name="Diagnosis Count" id="Diagnosis Count" placeholder="Enter Diagnosis Count" required>
+
+            <label for="ChronicDisease_Count">Chronic Disease Count:</label>
+            <input type="number" step="0.01" name="ChronicDisease_Count" id="ChronicDisease_Count" placeholder="Enter Chronic Disease Count" required>
+
+            <label for="Age">Age:</label>
+            <input type="number" step="0.01" name="Age" id="Age" placeholder="Enter Age" required>
+
+            <input type="submit" value="Predict Fraud Probability">
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">
+                <p>{{ prediction_text }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
